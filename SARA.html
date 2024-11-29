@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown al Compleanno</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        #countdown {
+            font-size: 3em;
+            margin-top: 20px;
+        }
+        #unlock {
+            display: none;
+            margin-top: 20px;
+        }
+        input {
+            font-size: 1em;
+            padding: 10px;
+        }
+        button {
+            font-size: 1em;
+            padding: 10px 20px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sorpresa in arrivo!</h1>
+    <p>Il contenuto sarà disponibile il 23 dicembre!</p>
+    <div id="countdown"></div>
+    <div id="unlock">
+        <p>Inserisci il codice per sbloccare la sorpresa:</p>
+        <input type="text" id="codeInput" placeholder="Codice">
+        <button onclick="checkCode()">Sblocca</button>
+        <p id="message"></p>
+    </div>
+
+    <script>
+        // Countdown al 23 dicembre
+        const targetDate = new Date("December 23, 2024 00:00:00").getTime();
+
+        const countdownInterval = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("countdown").innerHTML = 
+                `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                document.getElementById("countdown").innerHTML = "È il momento!";
+                document.getElementById("unlock").style.display = "block";
+            }
+        }, 1000);
+
+        // Controllo del codice
+        function checkCode() {
+            const codeInput = document.getElementById("codeInput").value;
+            const correctCode = "TUA-PASSWORD";
+
+            if (codeInput === correctCode) {
+                document.getElementById("message").innerHTML = 
+                    "<strong>Ben fatto!</strong> Ecco la tua sorpresa: 🎁 <a href='https://link-alla-sorpresa.com'>Clicca qui</a>";
+            } else {
+                document.getElementById("message").innerHTML = 
+                    "<strong>Codice errato.</strong> Riprova!";
+            }
+        }
+    </script>
+</body>
+</html>
