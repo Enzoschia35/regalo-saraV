@@ -48,7 +48,7 @@
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
             // Mostra il countdown
-            document.getElementById("countdown").innerHTML = ${days} giorni, ${hours} ore, ${minutes} minuti, ${seconds} secondi;
+            document.getElementById("countdown").innerHTML = `${days} giorni, ${hours} ore, ${minutes} minuti, ${seconds} secondi`;
 
             // Quando il countdown arriva a zero, mostra il contenuto
             if (distance < 0) {
